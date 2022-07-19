@@ -32,6 +32,8 @@ public class FunctionMappings {
                 s(SqlStdOperatorTable.GREATER_THAN_OR_EQUAL, "gte"),
                 s(SqlStdOperatorTable.EQUALS, "equal"),
                 s(SqlStdOperatorTable.BIT_XOR, "xor"),
+                s(SqlStdOperatorTable.IS_NULL, "is_null"),
+                s(SqlStdOperatorTable.IS_NOT_NULL, "is_not_null"),
                 s(SqlStdOperatorTable.NOT_EQUALS, "not_equal"),
                 s(SqlStdOperatorTable.MINUS_DATE, "subtract"),
                 s(SqlStdOperatorTable.DATETIME_PLUS, "add"),
@@ -74,13 +76,13 @@ public class FunctionMappings {
             SqlStdOperatorTable.PLUS,
                 resolver(
                     SqlStdOperatorTable.PLUS,
-                    Set.of("i8", "i16", "i32", "i64", "f32", "f64", "decimal")),
+                    Set.of("i8", "i16", "i32", "i64", "f32", "f64", "dec")),
             SqlStdOperatorTable.DATETIME_PLUS,
                 resolver(SqlStdOperatorTable.PLUS, Set.of("date", "time", "timestamp")),
             SqlStdOperatorTable.MINUS,
                 resolver(
                     SqlStdOperatorTable.MINUS,
-                    Set.of("i8", "i16", "i32", "i64", "f32", "f64", "decimal")),
+                    Set.of("i8", "i16", "i32", "i64", "f32", "f64", "dec")),
             SqlStdOperatorTable.MINUS_DATE,
                 resolver(
                     SqlStdOperatorTable.MINUS_DATE, Set.of("date", "timestamp_tz", "timestamp")));

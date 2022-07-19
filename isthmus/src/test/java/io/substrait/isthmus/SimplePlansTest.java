@@ -36,6 +36,16 @@ public class SimplePlansTest extends PlanTestBase {
   }
 
   @Test
+  public void isNotNull() throws IOException, SqlParseException {
+    assertProtoPlanRoundrip("select L_ORDERKEY from lineitem WHERE L_ORDERKEY is not null;");
+  }
+
+  @Test
+  public void isNull() throws IOException, SqlParseException {
+    assertProtoPlanRoundrip("select L_ORDERKEY from lineitem WHERE L_ORDERKEY is null;");
+  }
+
+  @Test
   public void multiStatement() throws IOException, SqlParseException {
     assertThrows(
         UnsupportedOperationException.class,
@@ -48,5 +58,12 @@ public class SimplePlansTest extends PlanTestBase {
         "select l_orderkey from lineitem; select l_partkey from lineitem WHERE L_ORDERKEY > 20;",
         new SqlToSubstrait(
             new SqlToSubstrait.Options(SqlToSubstrait.StatementBatching.MULTI_STATEMENT)));
+  }
+
+  @Test
+  public void virtualTable() throws IOException, SqlParseException {
+    assertProtoPlanRoundrip("SELECT  1");
+    assertProtoPlanRoundrip(
+        "SELECT  * FROM    ( " + "        VALUES (1), (3) " + "        ) AS q (col1)");
   }
 }
